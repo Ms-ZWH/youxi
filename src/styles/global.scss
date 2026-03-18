@@ -1,0 +1,138 @@
+// ========== CSS 变量（默认主题：大厅） ==========
+:root {
+  --color-primary: #c084fc;
+  --color-secondary: #f472b6;
+  --color-accent: #818cf8;
+  --color-bg: #0a0a0f;
+  --color-card-bg: rgba(255, 255, 255, 0.05);
+  --color-text: #e2e8f0;
+  --theme-gradient: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #0a0a0f 100%);
+
+  --font-title: 'STKaiti', 'KaiTi', 'STSong', serif;
+  --font-body: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --transition-theme: all 0.4s ease;
+  --border-radius: 12px;
+  --border-radius-lg: 20px;
+}
+
+// ========== 重置 ==========
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  transition: background 0.4s ease, color 0.4s ease;
+  overflow-x: hidden;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+// ========== 滚动条 ==========
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 3px;
+  opacity: 0.6;
+}
+
+// ========== 通用工具类 ==========
+.page-bg {
+  min-height: 100vh;
+  background: var(--theme-gradient);
+  transition: var(--transition-theme);
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.text-primary { color: var(--color-primary); }
+.text-secondary { color: var(--color-secondary); }
+
+// ========== 页面过渡动画 ==========
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(16px);
+}
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-16px);
+}
+
+// ========== 卡片通用 ==========
+.glass-card {
+  background: var(--color-card-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--border-radius-lg);
+  transition: var(--transition-theme);
+}
+
+// ========== 按钮 ==========
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 28px;
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s;
+
+  &:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+  }
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 28px;
+  background: transparent;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+
+  &:hover {
+    background: rgba(255,255,255,0.06);
+    transform: translateY(-1px);
+  }
+}
