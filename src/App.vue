@@ -4,10 +4,13 @@
       <component :is="Component" :key="route.path" />
     </transition>
   </router-view>
+  <BottomTabBar v-if="route.meta.showTab" />
 </template>
 
 <script setup>
-// App 根组件，仅负责路由视图渲染与页面过渡
+import { useRoute } from 'vue-router'
+import BottomTabBar from '@/components/BottomTabBar.vue'
+const route = useRoute()
 </script>
 
 <style>

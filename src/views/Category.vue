@@ -56,10 +56,12 @@ import { useRoute, useRouter } from 'vue-router'
 import GameCard from '@/components/GameCard/GameCard.vue'
 import { getCategoryById } from '@/config/categories.js'
 import { useThemeStore } from '@/stores/themeStore'
+import { useUserStore } from '@/stores/userStore'
 
-const route = useRoute()
-const router = useRouter()
+const route      = useRoute()
+const router     = useRouter()
 const themeStore = useThemeStore()
+const userStore  = useUserStore()
 
 const category = computed(() => getCategoryById(route.params.id))
 
@@ -81,11 +83,15 @@ function applyCurrentTheme() {
 }
 
 function handleGameClick(game) {
-  if (game.routeName) {
-    router.push({ name: game.routeName })
-  } else {
+  if (!game.routeName) {
     alert(`《${game.name}》即将开放，敬请期待！`)
+    return
   }
+  if (!userStore.isVip) {
+    router.push('/shop')
+    return
+  }
+  router.push({ name: game.routeName })
 }
 
 onMounted(applyCurrentTheme)

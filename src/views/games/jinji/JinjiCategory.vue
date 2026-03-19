@@ -55,6 +55,35 @@
         </div>
       </div>
 
+      <!-- 人妻模拟器 -->
+      <div class="system-card">
+        <div class="system-header">
+          <div class="system-icon">
+            <i class="fas fa-ring"></i>
+          </div>
+          <div class="system-title">
+            人妻模拟器之现代<br>厌倦丈夫之后
+          </div>
+        </div>
+
+        <div class="tag-list">
+          <span class="tag highlight"><i class="fas fa-heart"></i>禁忌之恋</span>
+          <span class="tag"><i class="fas fa-home"></i>现代</span>
+          <span class="tag"><i class="fas fa-theater-masks"></i>情感</span>
+          <span class="tag"><i class="fas fa-random"></i>多结局</span>
+          <span class="tag"><i class="fas fa-gamepad"></i>模拟</span>
+        </div>
+
+        <div class="system-desc">
+          <i class="fas fa-star"></i> 婚姻围城里，厌倦与渴望交织的禁忌故事
+        </div>
+
+        <div class="btn-start" @click="handleStartRenwei">
+          <i class="fas fa-play"></i> 开始游戏
+          <i class="fas fa-heart" style="font-size: 0.8rem; opacity: 0.7;"></i>
+        </div>
+      </div>
+
       <!-- 即将上线 -->
       <div class="coming-soon">
         <strong>禁忌之恋</strong>后续的精彩游戏即将上线，敬请期待！
@@ -76,11 +105,25 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
+import { useUserStore } from '@/stores/userStore'
 
-const router = useRouter()
+const router    = useRouter()
+const userStore = useUserStore()
 
 function handleStart() {
+  if (!userStore.isVip) {
+    router.push('/shop')
+    return
+  }
   router.push({ name: 'JinjiGame001' })
+}
+
+function handleStartRenwei() {
+  if (!userStore.isVip) {
+    router.push('/shop')
+    return
+  }
+  router.push({ name: 'RenweiGame001' })
 }
 </script>
 
@@ -350,6 +393,24 @@ function handleStart() {
   margin: 6px 0 8px;
 
   i { color: #ffacac; margin-right: 5px; }
+}
+
+/* ── 即将开放按钮 ── */
+.btn-coming {
+  background: rgba(100, 100, 100, 0.25);
+  border: 1.5px solid rgba(200, 200, 200, 0.4);
+  border-radius: 40px;
+  padding: 10px 28px;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.5);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+  align-self: center;
+  cursor: default;
+  i { opacity: 0.6; }
 }
 
 /* ── 开始游戏按钮 ── */

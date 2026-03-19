@@ -1,0 +1,16 @@
+export const ACHIEVEMENTS = [
+  { id: 'end_success',       icon: '♥', name: '真心所至',   desc: '达成任意成功结局' },
+  { id: 'end_hidden_guyan',  icon: '◈', name: '最后一局',   desc: '解锁顾衍隐藏结局' },
+  { id: 'end_hidden_shenmo', icon: '◈', name: '归零',       desc: '解锁沈默隐藏结局' },
+  { id: 'end_hidden_luoyu',  icon: '◈', name: '没有剧本',   desc: '解锁洛屿隐藏结局' },
+  { id: 'end_bad',           icon: '♠', name: '差一点',     desc: '达成任意 Bad End' },
+  { id: 'end_fail',          icon: '♡', name: '一无所获',   desc: '以最低分结束游戏' },
+  { id: 'visit_12',          icon: '★', name: '常客',       desc: '与某人共度12次回合' },
+  { id: 'streak_5',          icon: '✦', name: '执念',       desc: '连续5回合专注同一人' },
+  { id: 'spend_100k',        icon: '¥', name: '挥金如土',   desc: '三人总消费突破10万' },
+  { id: 'spend_shenmo_30k',  icon: '¥', name: '无声的账',   desc: '在沈默身上消费≥3万' },
+  { id: 'no_shock',          icon: '◉', name: '完美伪装',   desc: '30天从未破人设' },
+  { id: 'shock_5',           icon: '⚡', name: '身经电击',  desc: '累计被电击5次' },
+  { id: 'heart_50',          icon: '◆', name: '初见端倪',   desc: '某角色真心值首次达50%' },
+  { id: 'all_v7',            icon: '✿', name: '周旋高手',   desc: '三人均完成第7次拜访' },
+]

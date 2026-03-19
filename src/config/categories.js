@@ -57,6 +57,14 @@ export const CATEGORIES = [
         tags: ['系统流', '多线攻略', '逆袭', '养成'],
         isNew: true,
         routeName: 'JinjiGame001',
+      },
+      {
+        id: 'jinji-002',
+        name: '人妻模拟器之现代厌倦丈夫之后',
+        icon: '💍',
+        summary: '婚姻的围城里，厌倦与渴望交织，你将如何书写属于自己的故事',
+        tags: ['现代', '情感', '模拟', '多结局'],
+        isNew: true,
       }
     ]
   },

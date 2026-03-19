@@ -340,7 +340,7 @@ function onRebirth() {
 // ── 返回大厅 ──────────────────────────────────────────────
 function goBack() {
   themeStore.clearTheme()
-  router.push('/')
+  router.push({ name: 'Category', params: { id: 'hougong' } })
 }
 </script>
 

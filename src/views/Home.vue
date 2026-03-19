@@ -17,22 +17,49 @@
       </div>
     </header>
 
-    <!-- 分类网格 -->
+    <!-- 主内容 -->
     <main class="container home-main">
-      <div class="section-title">
-        <span class="title-line"><i class="fas fa-heart" /></span>
-        <h2>选择游戏类型</h2>
-        <span class="title-line"><i class="fas fa-chevron-right" /></span>
+
+      <!-- Tab 切换 -->
+      <div class="tab-bar">
+        <div class="tab-item" :class="{ active: activeTab === 'free' }" @click="activeTab = 'free'">
+          🎮 免费体验
+        </div>
+        <div class="tab-item" :class="{ active: activeTab === 'vip' }" @click="activeTab = 'vip'">
+          👑 全站畅玩
+        </div>
       </div>
 
-      <div class="categories-grid">
-        <CategoryCard
-          v-for="cat in CATEGORIES"
-          :key="cat.id"
-          :category="cat"
-          @click="goToCategory"
-        />
+      <!-- 免费体验 -->
+      <div v-if="activeTab === 'free'" class="tab-content">
+        <div class="free-game-card" @click="router.push({ name: 'HougongIntro' })">
+          <div class="free-game-icon">📺</div>
+          <div class="free-game-info">
+            <div class="free-game-name">穿越后宫我直播宫斗</div>
+            <div class="free-game-desc">穿越进高难度宫斗游戏，开启直播间，从底层秀女一步步逆袭</div>
+            <div class="free-game-tags">
+              <span class="tag free-tag">免费</span>
+              <span class="tag">穿越</span>
+              <span class="tag">宫斗</span>
+              <span class="tag">养成</span>
+            </div>
+          </div>
+          <i class="fas fa-chevron-right free-game-arrow"></i>
+        </div>
       </div>
+
+      <!-- 全站畅玩 -->
+      <div v-if="activeTab === 'vip'" class="tab-content">
+        <div class="categories-grid">
+          <CategoryCard
+            v-for="cat in CATEGORIES"
+            :key="cat.id"
+            :category="cat"
+            @click="goToCategory"
+          />
+        </div>
+      </div>
+
     </main>
 
     <!-- 底部 -->
@@ -48,14 +75,17 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import CategoryCard from '@/components/CategoryCard/CategoryCard.vue'
 import { CATEGORIES } from '@/config/categories.js'
 import { useThemeStore } from '@/stores/themeStore'
+import { useUserStore } from '@/stores/userStore'
 
 const router = useRouter()
 const themeStore = useThemeStore()
+const userStore  = useUserStore()
+const activeTab  = ref('free')
 
 onMounted(() => themeStore.clearTheme())
 onUnmounted(() => {})
@@ -201,7 +231,7 @@ function particleStyle(i) {
 /* ---- Main ---- */
 .home-main {
   max-width: 440px !important;
-  padding: 0 22px 40px;
+  padding: 0 22px 80px;
 }
 
 /* 分类标题行（对应 .section-header） */
@@ -320,5 +350,126 @@ function particleStyle(i) {
 @keyframes float {
   0%, 100% { transform: translate(-50%, -50%) translateY(0); opacity: 0.4; }
   50% { transform: translate(-50%, -50%) translateY(-8px); opacity: 0.8; }
+}
+
+/* ---- Tab 切换 ---- */
+.tab-bar {
+  display: flex;
+  gap: 10px;
+  margin: 28px 0 20px;
+  background: #fff3f9;
+  border-radius: 60px;
+  padding: 5px;
+  border: 1px solid #ffd6eb;
+  box-shadow: 0 4px 10px -4px #f0b8d2;
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 9px 0;
+  border-radius: 60px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #b07090;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.5px;
+
+  &.active {
+    background: linear-gradient(130deg, #e8879f, #c9567a);
+    color: #fff;
+    box-shadow: 0 6px 14px -6px #c0527a;
+  }
+}
+
+/* ---- 免费游戏卡片 ---- */
+.tab-content {
+  padding-bottom: 8px;
+}
+
+.free-game-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #fff;
+  border-radius: 24px;
+  padding: 18px 16px;
+  border: 1px solid #ffd6eb;
+  box-shadow: 0 10px 24px -10px rgba(180, 90, 130, 0.3);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 28px -10px rgba(180, 90, 130, 0.4);
+  }
+}
+
+.free-game-icon {
+  font-size: 42px;
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(140deg, #ffe9f4, #ffd6e9);
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 14px -6px #f3b6d1;
+}
+
+.free-game-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.free-game-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #5e334b;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.free-game-desc {
+  font-size: 12px;
+  color: #a07090;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.free-game-tags {
+  display: flex;
+  gap: 5px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-size: 11px;
+  padding: 2px 9px;
+  border-radius: 20px;
+  background: #fff0f7;
+  color: #b07090;
+  border: 1px solid #ffd6eb;
+  font-weight: 600;
+
+  &.free-tag {
+    background: linear-gradient(130deg, #a8e6cf, #79d0b0);
+    color: #1a5c46;
+    border-color: #79d0b0;
+  }
+}
+
+.free-game-arrow {
+  color: #d0a0b8;
+  font-size: 14px;
+  flex-shrink: 0;
 }
 </style>

@@ -7,7 +7,19 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
-    meta: { title: '游戏大厅' }
+    meta: { title: '游戏大厅', showTab: true }
+  },
+  {
+    path: '/shop',
+    name: 'Shop',
+    component: () => import('@/views/Shop.vue'),
+    meta: { title: '购买', showTab: true }
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: () => import('@/views/Profile.vue'),
+    meta: { title: '我的', showTab: true }
   },
   {
     path: '/category/jinji',
@@ -38,6 +50,12 @@ const routes = [
     name: 'JinjiGame001',
     component: () => import('@/views/games/jinji/JinjiGame001.vue'),
     meta: { title: '绑定富婆系统后，我包养了3个小白脸', categoryId: 'jinji' }
+  },
+  {
+    path: '/game/jinji/renwei-001',
+    name: 'RenweiGame001',
+    component: () => import('@/views/games/jinji/RenweiGame001.vue'),
+    meta: { title: '人妻模拟器之现代厌倦丈夫以后', categoryId: 'jinji' }
   },
   {
     path: '/:pathMatch(.*)*',
